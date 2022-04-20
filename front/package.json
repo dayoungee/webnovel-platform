@@ -1,0 +1,18 @@
+{
+  "name": "webnovel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.1.3",
+    "next": "^12.1.5",
+    "node-sass": "^7.0.1",
+    "react-bootstrap": "^2.3.0",
+    "scss": "^0.2.4"
+  }
+}
