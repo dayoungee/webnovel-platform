@@ -1,6 +1,11 @@
-.image{
-  display:block;
-  margin:auto;
+@import '../abstracts/mixins.module';
+
+.image {
+  display: block;
+  margin: auto;
   height: 300px;
   object-fit: cover;
+  @include respond(phone) {
+    height: 150px;
+  }
 }
