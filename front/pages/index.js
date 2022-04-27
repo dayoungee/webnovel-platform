@@ -1,15 +1,14 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from "../components/Header";
 import Slider from "../components/Slider";
+import AppLayout from "../components/AppLayout";
 
 const Main = () => {
 
     return (
-        <>
-            <Header />
+        <AppLayout>
             <Slider />
-        </>
-
+        </AppLayout>
     );
 
 }
