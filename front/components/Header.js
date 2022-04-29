@@ -2,7 +2,11 @@ import React from "react";
 import {Container, Nav, Navbar, Button} from "react-bootstrap";
 import { MDBCol, MDBInput } from "mdbreact";
 import styles from "../style/components/_header.module.scss";
+import Router from 'next/router';
 
+const goSignup = ()=>{
+    Router.push('/signup');
+}
 const Header = () => {
     return (
         <Navbar bg="light" variant="light">
@@ -14,7 +18,7 @@ const Header = () => {
                 </Nav>
                 <Nav>
                     <Button className={styles.buttonStyle} variant="outline-secondary">로그인</Button>
-                    <Button className={styles.buttonStyle} variant="secondary">회원가입</Button>
+                    <Button className={styles.buttonStyle} variant="secondary" onClick={goSignup}>회원가입</Button>
                 </Nav>
             </Container>
         </Navbar>

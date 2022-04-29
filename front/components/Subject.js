@@ -10,11 +10,11 @@ const iconClick = ()=>{
 };
 const Subject = ()=>{
     return(
-        <div className={styles.layout}>
+        <>
          <div className={styles.title}>주제별 모아보기</div>
             <MdMenuBook onClick={iconClick} className={styles.novelIcon} size = "60"/>
             <a href= "/series/novel" className={styles.name}>웹소설</a>
-        </div>
+        </>
     )
 }
 
