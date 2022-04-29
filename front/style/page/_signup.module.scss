@@ -1,0 +1,30 @@
+@import '../abstracts/mixins.module';
+
+.title{
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.subtext{
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: darkgray;
+}
+.pagelayout{
+  margin-right: 38%;
+  margin-left: 30%;
+  @include respond(phone) {
+    margin-right: 13%;
+    margin-left: 15%;
+  }
+}
+
+.signupButton{
+  margin : 5px;
+  width: 400px;
+  @include respond(phone) {
+    width: 320px;
+  }
+}
+.logintext{
+  color: inherit;
+}
