@@ -27,7 +27,6 @@ const Email = () =>{
         }
         else{
             // 모달 오픈\
-            console.log("모달 ㄱ")
             openModal();
         }
 
@@ -67,8 +66,8 @@ const Email = () =>{
                         checked={checked}
                         onChange={handleChange}
                         inputProps={{'aria-label': 'controlled'}}/>서비스 약관에 동의합니다.<br/>
-                    <Modal open={modalOpen} close={closeModal} header="알림" />
-                    <Button className={styles.signupButton} variant="primary" onClick={openModal}>회원가입</Button>
+                    <Button className={styles.signupButton} variant="primary" onClick={signupCheck}>회원가입</Button>
+                    <Modal open={modalOpen} close={closeModal} header="알림" >서비스 약관에 동의해주세요.</Modal>
                 </Form>
             </div>
         </AppLayout>

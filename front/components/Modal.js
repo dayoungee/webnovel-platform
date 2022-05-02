@@ -1,5 +1,6 @@
 import React from 'react';
-import '../style/components/_modal.module.scss';
+import {Button} from "react-bootstrap";
+import styles from '../style/components/_modal.module.scss'
 
 const Modal = (props) => {
     // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
@@ -7,24 +8,18 @@ const Modal = (props) => {
 
     return (
         // 모달이 열릴때 openModal 클래스가 생성된다.
-        <div className={open ? 'openModal modal' : 'modal'}>
+        <>
             {open ? (
-                <section>
-                    <header>
-                        {header}
-                        <button className="close" onClick={close}>
-                            &times;
-                        </button>
-                    </header>
-                    <main>{props.children}</main>
-                    <footer>
-                        <button className="close" onClick={close}>
-                            close
-                        </button>
-                    </footer>
-                </section>
+                <div className={styles.modal} onClick={close}>
+                    <div className={styles.subModal}>
+                   <div>{header}</div><span className={styles.cancelButton} onClick={close}>&times;</span>
+                        <br/>
+                    <p>{props.children}</p>
+                    <Button className={styles.cancelButton} variant="outline-primary" onClick={close}>확인</Button>
+                    </div>
+                </div>
             ) : null}
-        </div>
+        </>
     );
 };
 
