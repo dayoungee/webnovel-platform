@@ -1,7 +1,6 @@
 {
   "name": "webnovel",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "dev": "next"
@@ -25,5 +24,7 @@
     "sass": "^1.50.1",
     "scss": "^0.2.4",
     "styled-components": "^5.3.5"
-  }
+  },
+  "devDependencies": {},
+  "description": ""
 }

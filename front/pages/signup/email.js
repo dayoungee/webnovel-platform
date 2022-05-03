@@ -32,18 +32,6 @@ const Email = () =>{
 
     }
 
-    const ageCheck = () => {
-        // 박스를 체크했을 때 (14세 이상일 때)
-        if (checked === true) {
-            setAlertMessage(false);
-            return false;
-            //통과 로그인 과정 ㄱㄱ
-        } else { // 박스를 체크하지 않았을 때 경고메시지
-            setAlertMessage(true);
-            return true;
-        }
-    }
-
     return(
         <AppLayout>
             <div className={styles.pagelayout}>

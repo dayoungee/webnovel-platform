@@ -9,6 +9,8 @@ import styles from '../style/page/_signup.module.scss'
 import Link from 'next/link';
 import Router from 'next/router';
 
+const typeEmail = "email";
+const typeNaver = "naver";
 
 const Signup = () => {
 
@@ -19,27 +21,18 @@ const Signup = () => {
         setChecked(!checked);
     });
 
-    const ageCheck = () => {
-        // 박스를 체크했을 때 (14세 이상일 때)
+    const ageCheck = (type) => () =>{
         if (checked === true) {
             setAlertMessage(false);
-            return false;
+            if(type === typeEmail){
+                Router.push('/signup/email');
+            }
+            else if(type === typeNaver){
+
+            }
             //통과 로그인 과정 ㄱㄱ
         } else { // 박스를 체크하지 않았을 때 경고메시지
             setAlertMessage(true);
-            return true;
-        }
-    }
-
-    const goEmail = () => {
-        if(!ageCheck()){
-            Router.push('/signup/email');
-        }
-    }
-
-    const goNaver = () =>{
-        if(!ageCheck()){
-           // Router.push('/signup/naver')
         }
     }
         return (
@@ -53,9 +46,9 @@ const Signup = () => {
                         inputProps={{'aria-label': 'controlled'}}/>만 14세 이상입니다.<br/>
                     {alertMessage && <div style={{color: 'red'}}>만 14세 이상만 가입이 가능합니다.</div>}
                     <Button className={styles.signupButton} variant="outline-success"
-                            onClick={goNaver}><SiNaver/> 네이버로 회원가입</Button><br/>
+                            onClick={ageCheck("naver")}><SiNaver/> 네이버로 회원가입</Button><br/>
                     <Button className={styles.signupButton} variant="outline-secondary"
-                            onClick={goEmail}><AiOutlineMail/> 이메일로 회원가입</Button><br/>
+                            onClick={ageCheck("email")}><AiOutlineMail/> 이메일로 회원가입</Button><br/>
                     이미 계정이 있으신가요?
                     <Link href="/login"><a className={styles.logintext}> 로그인</a></Link>
                 </div>
