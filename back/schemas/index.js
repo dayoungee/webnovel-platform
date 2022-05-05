@@ -7,8 +7,6 @@ const connect = () => {
 
     mongoose.connect('mongodb://localhost:27017', {
         dbName: 'webnovel',
-        useNewUrlParser: true,
-        useCreateIndex: true,
     }, (error) => {
         if (error) {
             console.log('몽고디비 연결 에러', error);
