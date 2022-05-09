@@ -1,8 +1,10 @@
-import React from "react";
+import React, {useCallback} from "react";
 import {Container, Nav, Navbar, Button} from "react-bootstrap";
 import { MDBCol, MDBInput } from "mdbreact";
 import styles from "../style/components/_header.module.scss";
 import Router from 'next/router';
+import {useDispatch, useSelector} from "react-redux";
+import { logoutAction} from "../reducers";
 
 const goSignup = ()=>{
     Router.push('/signup');
@@ -12,6 +14,12 @@ const goLogin = () =>{
     Router.push('/login');
 }
 const Header = () => {
+    const dispatch = useDispatch();
+    const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+
+    const logout = useCallback(() =>{
+        dispatch(logoutAction());
+    });
     return (
         <Navbar bg="light" variant="light">
             <Container>
@@ -21,7 +29,7 @@ const Header = () => {
                     <Nav.Link href="/">일정</Nav.Link>
                 </Nav>
                 <Nav>
-                    <Button className={styles.buttonStyle} variant="outline-secondary" onClick={goLogin}>로그인</Button>
+                    {isLoggedIn ? <Button className={styles.buttonStyle} variant="outline-secondary" onClick={logout}>로그아웃</Button>:<Button className={styles.buttonStyle} variant="outline-secondary" onClick={goLogin}>로그인</Button> }
                     <Button className={styles.buttonStyle} variant="secondary" onClick={goSignup}>회원가입</Button>
                 </Nav>
             </Container>

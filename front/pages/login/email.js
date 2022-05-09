@@ -5,8 +5,19 @@ import AppLayout from "../../components/AppLayout";
 import React, {useCallback, useState} from "react";
 import Checkbox from "@mui/material/Checkbox";
 import Modal from "../../components/Modal"
+import {useDispatch} from "react-redux";
+import useInput from "../../hooks/useInput";
+import { loginAction} from "../../reducers";
 
 const Email = () =>{
+    const dispatch = useDispatch();
+    const [id, onChangeId] = useInput('');
+    const [password, onChangePassword] = useInput('');
+
+    const onSubmitForm = useCallback(()=>{
+        console.log(id, password);
+        dispatch(loginAction(id, password));
+    },[id, password]);
 
     return(
         <AppLayout>
@@ -15,12 +26,12 @@ const Email = () =>{
                 <br/>
                 <Form>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                        <Form.Control type="email" placeholder="이메일" />
+                        <Form.Control type="email" placeholder="이메일" onChange={onChangeId}/>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                        <Form.Control type="email" placeholder="비밀번호" />
+                        <Form.Control type="email" placeholder="비밀번호" onChange={onChangePassword} />
                     </Form.Group>
-                    <Button className={styles.signupButton} variant="primary">로그인</Button>
+                    <Button className={styles.signupButton} variant="primary" onClick={onSubmitForm}>로그인</Button>
                 </Form>
             </div>
         </AppLayout>
