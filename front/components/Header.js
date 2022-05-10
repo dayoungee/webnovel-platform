@@ -4,7 +4,7 @@ import { MDBCol, MDBInput } from "mdbreact";
 import styles from "../style/components/_header.module.scss";
 import Router from 'next/router';
 import {useDispatch, useSelector} from "react-redux";
-import { logoutAction} from "../reducers";
+import { logoutAction} from "../reducers/user";
 
 const goSignup = ()=>{
     Router.push('/signup');

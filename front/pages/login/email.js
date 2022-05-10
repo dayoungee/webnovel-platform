@@ -7,7 +7,7 @@ import Checkbox from "@mui/material/Checkbox";
 import Modal from "../../components/Modal"
 import {useDispatch} from "react-redux";
 import useInput from "../../hooks/useInput";
-import { loginAction} from "../../reducers";
+import { loginAction} from "../../reducers/user";
 
 const Email = () =>{
     const dispatch = useDispatch();
