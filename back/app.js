@@ -5,7 +5,6 @@ const nunjucks = require('nunjucks');
 const indexRouter = require('./routes');
 const usersRouter = require('./routes/user');
 const cors = require('cors');
-
 const connect = require('./schemas');
 
 const app = express();
