@@ -5,11 +5,18 @@ import AppLayout from "../../components/AppLayout";
 import React, {useCallback, useState} from "react";
 import Checkbox from "@mui/material/Checkbox";
 import Modal from "../../components/Modal"
+import {useDispatch} from "react-redux";
+import {SIGN_UP_REQUEST, signUpRequestAction} from "../../reducers/user";
+import useInput from "../../hooks/useInput";
 
 const Email = () =>{
-
+    const dispatch = useDispatch();
     const [checked, setChecked] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
+
+    const [email, onChangeEmail] = useInput('');
+    const [password, onChangePassword] = useInput('');
+    const [nickname, onChangeNickname] = useInput('');
 
     const handleChange = useCallback(() => {
         setChecked(!checked);
@@ -21,16 +28,24 @@ const Email = () =>{
         setModalOpen(false);
     };
 
-    const signupCheck= ()=> {
+    const signup = useCallback(() => {
+        dispatch({
+            type: SIGN_UP_REQUEST,
+            data:{ email, password, nickname},
+        })
+    },[email, password,nickname]);
+
+    const signupCheck= () => {
         if(checked){
             // 약관에 동의 했다! 회원가입 ㄱㄱ
+            signup();
         }
         else{
             // 모달 오픈\
             openModal();
         }
 
-    }
+    };
 
     return(
         <AppLayout>
@@ -40,15 +55,15 @@ const Email = () =>{
                 <Form>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                         <Form.Label>이메일 주소</Form.Label>
-                        <Form.Control type="email" placeholder="이메일 주소" />
+                        <Form.Control type="email" placeholder="이메일 주소" onChange={onChangeEmail}/>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                         <Form.Label>비밀번호</Form.Label>
-                        <Form.Control type="email" placeholder="비밀번호" />
+                        <Form.Control type="email" placeholder="비밀번호" onChange={onChangePassword}/>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                         <Form.Label>닉네임</Form.Label>
-                        <Form.Control type="email" placeholder="닉네임" />
+                        <Form.Control type="email" placeholder="닉네임" onChange={onChangeNickname}/>
                     </Form.Group>
                     <Checkbox
                         checked={checked}

@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const nunjucks = require('nunjucks');
 const indexRouter = require('./routes');
 const usersRouter = require('./routes/user');
+const cors = require('cors');
 
 const connect = require('./schemas');
 
@@ -18,6 +19,10 @@ nunjucks.configure('views', {
 connect();
 
 app.use(morgan('dev'));
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+}));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

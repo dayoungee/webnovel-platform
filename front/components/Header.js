@@ -4,7 +4,7 @@ import { MDBCol, MDBInput } from "mdbreact";
 import styles from "../style/components/_header.module.scss";
 import Router from 'next/router';
 import {useDispatch, useSelector} from "react-redux";
-import { logoutAction} from "../reducers/user";
+import { logoutRequestAction} from "../reducers/user";
 
 const goSignup = ()=>{
     Router.push('/signup');
@@ -16,9 +16,11 @@ const goLogin = () =>{
 const Header = () => {
     const dispatch = useDispatch();
     const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+    const { me, isLoggingOut } = useSelector((state)=>state.user);
 
     const logout = useCallback(() =>{
-        dispatch(logoutAction());
+        console.log(me);
+        dispatch(logoutRequestAction());
     });
     return (
         <Navbar bg="light" variant="light">
