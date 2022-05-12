@@ -31,7 +31,7 @@ function* signUp(action) {
 }
 
 function logInAPI(data){
-    return axios.post('/api/login',data)
+    return axios.post('/user/login',data)
 }
 function* logIn(action){
     try {
@@ -49,7 +49,7 @@ function* logIn(action){
 }
 
 function logoutAPI(){
-    return axios.post('/api/logout')
+    return axios.post('/user/logout')
 }
 
 function* logOut(){

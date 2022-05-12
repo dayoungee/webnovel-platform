@@ -12,13 +12,13 @@ import { loginRequestAction} from "../../reducers/user";
 const Email = () =>{
     const dispatch = useDispatch();
     const { isLoggingIn } = useSelector((state)=>state.user);
-    const [id, onChangeId] = useInput('');
+    const [email, onChangeEmail] = useInput('');
     const [password, onChangePassword] = useInput('');
 
     const onSubmitForm = useCallback(()=>{
-        console.log(id, password);
-        dispatch(loginRequestAction(id, password));
-    },[id, password]);
+        console.log(email, password);
+        dispatch(loginRequestAction({email, password}));
+    },[email, password]);
 
     return(
         <AppLayout>
@@ -27,7 +27,7 @@ const Email = () =>{
                 <br/>
                 <Form>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                        <Form.Control type="email" placeholder="이메일" onChange={onChangeId}/>
+                        <Form.Control type="email" placeholder="이메일" onChange={onChangeEmail}/>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                         <Form.Control type="email" placeholder="비밀번호" onChange={onChangePassword} />
