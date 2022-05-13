@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import wrapper from '../store/configureStore';
 
