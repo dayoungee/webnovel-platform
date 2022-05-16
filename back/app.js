@@ -6,6 +6,9 @@ const indexRouter = require('./routes');
 const usersRouter = require('./routes/user');
 const cors = require('cors');
 const connect = require('./schemas');
+const passportConfig = require('./passport');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 app.set('port', process.env.PORT || 3002);
@@ -16,6 +19,7 @@ nunjucks.configure('views', {
 });
 
 connect();
+passportConfig();
 
 app.use(morgan('dev'));
 app.use(cors({
@@ -25,6 +29,11 @@ app.use(cors({
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(session());
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use('/', indexRouter);
 app.use('/user', usersRouter);
 

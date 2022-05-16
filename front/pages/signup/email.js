@@ -19,13 +19,20 @@ const Email = () =>{
     const [password, onChangePassword] = useInput('');
     const [nickname, onChangeNickname] = useInput('');
 
-    const { signUpDone } = useSelector((state) => state.user);
+    const { signUpDone, signUpError } = useSelector((state) => state.user);
 
     useEffect(()=>{
        if(signUpDone) {
+           alert("회원가입이 완료되었습니다.");
            Router.push('/');
        }
     },[signUpDone]);
+
+    useEffect(()=>{
+        if(signUpError){
+            alert(signUpError);
+        }
+    },[signUpError]);
 
     const handleChange = useCallback(() => {
         setChecked(!checked);
