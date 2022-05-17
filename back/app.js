@@ -9,7 +9,10 @@ const connect = require('./schemas');
 const passportConfig = require('./passport');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
+const passport = require('passport');
+const dotenv = require('dotenv');
 
+dotenv.config();
 const app = express();
 app.set('port', process.env.PORT || 3002);
 app.set('view engine', 'html');
@@ -29,8 +32,12 @@ app.use(cors({
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(session());
+app.use(cookieParser(process.env.COOKIE_SECRET));
+app.use(session({
+    saveUninitialized: false,
+    resave: false,
+    secret: process.env.COOKIE_SECRET,
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 
