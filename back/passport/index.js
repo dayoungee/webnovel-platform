@@ -2,14 +2,14 @@ const passport = require('passport');
 const local = require('./local');
 const { User } = require('../schemas');
 
-module.exports = () => {
+/*module.exports = () => {
     passport.serializeUser((user, done) => { // 서버쪽에 [{ id: 1, cookie: 'clhxy' }]
-        done(null, user.id);
+        done(null, user.email);
     });
 
-    passport.deserializeUser(async (id, done) => {
+    passport.deserializeUser(async (email, done) => {
         try {
-            const user = await User.findOne({  id });
+            const user = await User.findOne({  email  });
             done(null, user); // req.user
         } catch (error) {
             console.error(error);
@@ -18,7 +18,7 @@ module.exports = () => {
     });
 
     local();
-};
+};*/
 
 // 프론트에서 서버로는 cookie만 보내요(clhxy)
 // 서버가 쿠키파서, 익스프레스 세션으로 쿠키 검사 후 id: 1 발견
