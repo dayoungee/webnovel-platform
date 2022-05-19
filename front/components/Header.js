@@ -15,13 +15,13 @@ const goLogin = () =>{
 }
 const Header = () => {
     const dispatch = useDispatch();
-    const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-    const { me, isLoggingOut } = useSelector((state)=>state.user);
+    const { me, logInDone } = useSelector((state)=>state.user);
 
     const logout = useCallback(() =>{
         console.log(me);
         dispatch(logoutRequestAction());
     });
+
     return (
         <Navbar bg="light" variant="light">
             <Container>
@@ -31,8 +31,9 @@ const Header = () => {
                     <Nav.Link href="/">일정</Nav.Link>
                 </Nav>
                 <Nav>
-                    {isLoggedIn ? <Button className={styles.buttonStyle} variant="outline-secondary" onClick={logout}>로그아웃</Button>:<Button className={styles.buttonStyle} variant="outline-secondary" onClick={goLogin}>로그인</Button> }
-                    <Button className={styles.buttonStyle} variant="secondary" onClick={goSignup}>회원가입</Button>
+                    {logInDone ? <Button className={styles.buttonStyle} variant="outline-secondary" onClick={logout}>로그아웃</Button>
+                        :<Button className={styles.buttonStyle} variant="outline-secondary" onClick={goLogin}>로그인</Button> &&
+                        <Button className={styles.buttonStyle} variant="secondary" onClick={goSignup}>회원가입</Button> }
                 </Nav>
             </Container>
         </Navbar>

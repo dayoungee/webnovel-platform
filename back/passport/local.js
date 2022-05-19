@@ -1,7 +1,7 @@
 const passport = require('passport');
 const { Strategy: LocalStrategy } = require('passport-local');
 const bcrypt = require('bcrypt');
-const { User } = require('../schemas');
+const User = require('../schemas/user'); // 구조분해할당하면 안됨
 
 module.exports = () => {
   passport.use(new LocalStrategy({
