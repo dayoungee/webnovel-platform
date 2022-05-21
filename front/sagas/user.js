@@ -11,6 +11,9 @@ import {
     LOAD_USER_FAILURE,
     LOAD_USER_REQUEST,
     LOAD_USER_SUCCESS,
+    NAVER_LOGIN_SUCCESS,
+    NAVER_LOGIN_FAILURE,
+    NAVER_LOGIN_REQUEST,
 } from "../reducers/user";
 
 function signUpAPI(data) {
@@ -90,6 +93,24 @@ function* loadUser(action) {
     }
 }
 
+function naverLogInAPI(data){
+    return axios.get('/user/login/naver',data)
+}
+function* naverLogIn(action){
+    try {
+        const result = yield call(naverLogInAPI, action.data)
+        yield put({
+            type: NAVER_LOGIN_SUCCESS,
+            data: result.data
+        });
+    }catch(err){
+        yield put({
+            type: NAVER_LOGIN_FAILURE,
+            error: err.response.data,
+        });
+    }
+}
+
 function* watchSignUp(){
     yield takeLatest(SIGN_UP_REQUEST, signUp);
 }
@@ -106,11 +127,16 @@ function* watchLoadUser() {
     yield takeLatest(LOAD_USER_REQUEST, loadUser);
 }
 
+function* watchNaverLogin() {
+    yield takeLatest(NAVER_LOGIN_REQUEST, naverLogIn);
+}
+
 export default function* userSaga(){
     yield all([
         fork(watchSignUp),
         fork(watchLogin),
         fork(watchLogOut),
         fork(watchLoadUser),
+        fork(watchNaverLogin),
     ])
 }

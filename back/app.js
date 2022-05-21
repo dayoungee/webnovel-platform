@@ -25,10 +25,13 @@ connect();
 passportConfig();
 
 app.use(morgan('dev'));
+
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: ['https://nid.naver.com/oauth2.0/authorize?auth_type=reprompt&response_type=code&redirect_uri=http%3A%2F%2F127.0.0.1%3A3000&client_id=AhTG4J_FlNKzgt_zee3n',
+        'http://localhost:3003','https://nid.naver.com'],
     credentials: true,
 }));
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

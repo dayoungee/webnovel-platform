@@ -13,6 +13,9 @@ export const initialState = {
     loadUserLoading: false, // 유저 정보 가져오기 시도중
     loadUserDone: false,
     loadUserError: null,
+    naverLogInLoading: false, // 로그인 시도중
+    naverLogInDone: false,
+    naverLogInError: null,
     me: null,
     signUpData: {},
     loginData: {},
@@ -33,6 +36,10 @@ export const LOG_OUT_FAILURE = 'LOG_OUT_FAILURE';
 export const LOAD_USER_REQUEST = 'LOAD_USER_REQUEST';
 export const LOAD_USER_SUCCESS = 'LOAD_USER_SUCCESS';
 export const LOAD_USER_FAILURE = 'LOAD_USER_FAILURE';
+
+export const NAVER_LOGIN_REQUEST = 'NAVER_LOGIN_REQUEST';
+export const NAVER_LOGIN_SUCCESS = 'NAVER_LOGIN_SUCCESS';
+export const NAVER_LOGIN_FAILURE = 'NAVER_LOGIN_FAILURE';
 
 
 export const loginRequestAction = (data) =>{
@@ -106,6 +113,20 @@ const reducer = (state = initialState, action) => {
             case LOAD_USER_FAILURE:
                 draft.loadUserLoading = false;
                 draft.loadUserError = action.error;
+                break;
+            case NAVER_LOGIN_REQUEST:
+                draft.naverLogInLoading = true;
+                draft.naverLogInError = null;
+                draft.naverLogInDone = false;
+                break;
+            case NAVER_LOGIN_SUCCESS:
+                draft.naverLogInLoading = false;
+                draft.me = action.data;
+                draft.naverLogInDone = true;
+                break;
+            case NAVER_LOGIN_FAILURE:
+                draft.naverLogInLoading = false;
+                draft.naverLogInError = action.error;
                 break;
             default:
                 return state;

@@ -1,5 +1,6 @@
 const passport = require('passport');
 const local = require('./local');
+const naver = require('./naver');
 const  User  = require('../schemas/user');
 
 module.exports = () => {
@@ -18,6 +19,7 @@ module.exports = () => {
     });
 
     local();
+    naver();
 };
 
 // 프론트에서 서버로는 cookie만 보내요(clhxy)

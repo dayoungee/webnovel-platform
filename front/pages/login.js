@@ -8,6 +8,8 @@ import {AiOutlineMail} from "react-icons/ai";
 import Link from "next/link";
 import React from "react";
 import Router from "next/router";
+import {useDispatch} from "react-redux";
+import { NAVER_LOGIN_REQUEST} from "../reducers/user";
 
 
 const typeNaver = "naver";
@@ -15,9 +17,15 @@ const typeEmail = "email";
 
 const Login = ()=>{
 
-    const Login = (type) => () =>{
-        if(type ===typeNaver){
+    const dispatch = useDispatch();
 
+    const Login = (type) => () =>{
+        if(type === typeNaver){
+            console.log("네이버로 로그인 시도중");
+            Router.push('http://localhost:3002/user/login/naver');
+/*            dispatch({
+                type:NAVER_LOGIN_REQUEST,
+            });*/
         }
         else if(type === typeEmail){
             Router.push('/login/email');
