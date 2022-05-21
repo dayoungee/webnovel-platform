@@ -24,7 +24,7 @@ const Email = () =>{
     useEffect(()=>{
        if(signUpDone) {
            alert("회원가입이 완료되었습니다.");
-           Router.push('/');
+           Router.replace('/');
        }
     },[signUpDone]);
 

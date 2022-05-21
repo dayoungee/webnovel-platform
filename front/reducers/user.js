@@ -10,6 +10,9 @@ export const initialState = {
     signUpLoading: false,
     signUpDone: false,
     signUpError: null,
+    loadUserLoading: false, // 유저 정보 가져오기 시도중
+    loadUserDone: false,
+    loadUserError: null,
     me: null,
     signUpData: {},
     loginData: {},
@@ -26,6 +29,11 @@ export const LOG_IN_FAILURE = 'LOG_IN_FAILURE';
 export const LOG_OUT_REQUEST = 'LOG_OUT_REQUEST';
 export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS';
 export const LOG_OUT_FAILURE = 'LOG_OUT_FAILURE';
+
+export const LOAD_USER_REQUEST = 'LOAD_USER_REQUEST';
+export const LOAD_USER_SUCCESS = 'LOAD_USER_SUCCESS';
+export const LOAD_USER_FAILURE = 'LOAD_USER_FAILURE';
+
 
 export const loginRequestAction = (data) =>{
     return{
@@ -84,6 +92,20 @@ const reducer = (state = initialState, action) => {
             case LOG_OUT_FAILURE:
                 draft.logOutLoading = false;
                 draft.logOutError = action.error;
+                break;
+            case LOAD_USER_REQUEST:
+                draft.loadUserLoading = true;
+                draft.loadUserError = null;
+                draft.loadUserDone = false;
+                break;
+            case LOAD_USER_SUCCESS:
+                draft.loadUserLoading = false;
+                draft.me = action.data;
+                draft.loadUserDone = true;
+                break;
+            case LOAD_USER_FAILURE:
+                draft.loadUserLoading = false;
+                draft.loadUserError = action.error;
                 break;
             default:
                 return state;

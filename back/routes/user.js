@@ -3,9 +3,9 @@ const User = require('../schemas/user');
 const bcrypt = require('bcrypt');  // 비밀번호 암호화 라이브러리
 const passport = require('passport');
 const router = express.Router();
-
-// POST /user/login
-router.post('/login',(req,res,next) =>{
+const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
+// POST /user/login 로그인하기
+router.post('/login', isNotLoggedIn,(req,res,next) =>{
     passport.authenticate('local',(err, user, info)=> {
         if (err) {
             console.error(err);
@@ -23,18 +23,21 @@ router.post('/login',(req,res,next) =>{
     })(req, res, next);
 });
 
-router.route('/')
-    .get(async (req, res, next) => {
+router.route('/') // GET /user // 로그인 정보 매번 가져오기
+    .get( async (req, res, next) => {
         try {
-            const user = await User.find({});
-            res.json(user);
-            console.log(user);
+            if(req.user){
+                const user = await User.findOne({ _id: req.user._id, });
+                res.json(user);
+            }else{
+                res.status(200).json(null);
+            }
         } catch (err) {
             console.error(err);
             next(err);
         }
     })
-    .post(async (req, res, next) => {
+    .post(isNotLoggedIn, async (req, res, next) => { // POST /user 회원가입
         try {
             const exUser = await User.findOne({
                 email: req.body.email,
@@ -57,7 +60,8 @@ router.route('/')
         }
     });
 
-router.post('/logout',(req, res, next)=>{
+// 로그아웃 //Post /user/logout
+router.post('/logout', isLoggedIn,(req, res, next)=>{
     req.logout();
     req.session.destroy();
     res.send('OK');

@@ -18,7 +18,7 @@ const Email = () =>{
 
     useEffect(()=>{
         if(logInDone){
-            Router.push('/');
+            Router.replace('/');
         }
     },[logInDone]);
 
