@@ -32,8 +32,8 @@ const Header = () => {
                 </Nav>
                 <Nav>
                     {logInDone ? <Button className={styles.buttonStyle} variant="outline-secondary" onClick={logout}>로그아웃</Button>
-                        :<Button className={styles.buttonStyle} variant="outline-secondary" onClick={goLogin}>로그인</Button> &&
-                        <Button className={styles.buttonStyle} variant="secondary" onClick={goSignup}>회원가입</Button> }
+                        :<div><Button className={styles.buttonStyle} variant="outline-secondary" onClick={goLogin}>로그인</Button>
+                        <Button className={styles.buttonStyle} variant="secondary" onClick={goSignup}>회원가입</Button> </div>}
                 </Nav>
             </Container>
         </Navbar>
