@@ -6,7 +6,7 @@ const router = express.Router();
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
 
 // POST /user/login 로그인하기
-router.post('/login', isNotLoggedIn,(req,res,next) =>{
+router.post('/user/login', isNotLoggedIn,(req,res,next) =>{
     passport.authenticate('local',(err, user, info)=> {
         if (err) {
             console.error(err);
@@ -24,7 +24,7 @@ router.post('/login', isNotLoggedIn,(req,res,next) =>{
     })(req, res, next);
 });
 
-router.route('/') // GET /user // 로그인 정보 매번 가져오기
+router.route('/user') // GET /user // 로그인 정보 매번 가져오기
     .get( async (req, res, next) => {
         try {
             if(req.user){
@@ -61,16 +61,20 @@ router.route('/') // GET /user // 로그인 정보 매번 가져오기
         }
     });
 
-router.get('/login/naver', passport.authenticate('naver', {
+router.get('/user/login/naver', passport.authenticate('naver', {
+    //authType: 'reprompt',
     authType: 'rerequest', scope: ['public_profile', 'email']
 }));
 
-router.get('/login/naver/callback', passport.authenticate('naver', { failureRedirect: '/' }), function(req, res) {
+router.get('/login/naver/callback', passport.authenticate('naver', {
+    failureRedirect: '/'
+}),
+    (req, res) => {
     res.redirect('/');
 });
 
 // 로그아웃 //Post /user/logout
-router.post('/logout', isLoggedIn,(req, res, next)=>{
+router.post('/user/logout', isLoggedIn,(req, res, next)=>{
     req.logout();
     req.session.destroy();
     res.send('OK');

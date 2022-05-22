@@ -14,15 +14,16 @@ import { NAVER_LOGIN_REQUEST} from "../reducers/user";
 
 const typeNaver = "naver";
 const typeEmail = "email";
+const serverDomain = "http://localhost:3002";
 
 const Login = ()=>{
 
-    const dispatch = useDispatch();
+    //const dispatch = useDispatch();
 
     const Login = (type) => () =>{
         if(type === typeNaver){
             console.log("네이버로 로그인 시도중");
-            Router.push('http://localhost:3002/user/login/naver');
+            Router.push(serverDomain + '/user/login/naver');
 /*            dispatch({
                 type:NAVER_LOGIN_REQUEST,
             });*/

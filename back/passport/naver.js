@@ -1,5 +1,5 @@
 const passport = require('passport');
-const { Strategy: NaverStrategy, Profile: NaverProfile } = require('passport-naver-v2');
+const NaverStrategy  = require('passport-naver').Strategy;;
 
 const User = require('../schemas/user'); // 구조분해할당하면 안됨
 
@@ -8,28 +8,25 @@ module.exports = () => {
         clientID: process.env.NAVER_ID,
         clientSecret: process.env.NAVER_SECRET,
         callbackURL: process.env.NAVER_CALLBACK_URL,
-    }, async (accessToken, refreshToken, profile, done) => {
+        passReqToCallback: true,
+    }, async(req, accessToken, refreshToken, profile, done) => {
         try{
-            const user = await User.findOne({
-                naverId: profile.naverId,
-                provider: 'naver'
-            });
-            console.log(naverId + " profile.naverId : " +  profile.naverId);
-            if(user){
-                done(null, user);
-            }else{
+            console.log("=============================== : " + profile.id);
+            User.findOne({ naverId: profile.id }, async(err, user) => {
+                if (user) {
+                    return done(err, user);
+                } // 회원 정보가 있으면 로그인
                 const newUser = await User.create({
-                    email: profile.email,
-                    nickname: profile.nickname,
-                    naverId: profile.naverId,
-                    provider: 'naver',
-                })
-                done(null, newUser);
-            }
+                    email: 'asdasd',
+                    nickname: 'dsad',
+                    password: 'dd',
+                });
+                return done(null, newUser);
+            });
         }
         catch (err){
-            console.error(error);
-            done(error);
+            console.error(err);
+            return done(err);
         }
 
     }));

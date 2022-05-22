@@ -27,8 +27,7 @@ passportConfig();
 app.use(morgan('dev'));
 
 app.use(cors({
-    origin: ['https://nid.naver.com/oauth2.0/authorize?auth_type=reprompt&response_type=code&redirect_uri=http%3A%2F%2F127.0.0.1%3A3000&client_id=AhTG4J_FlNKzgt_zee3n',
-        'http://localhost:3003','https://nid.naver.com'],
+    origin: 'http://localhost:3003',
     credentials: true,
 }));
 
@@ -45,7 +44,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', indexRouter);
-app.use('/user', usersRouter);
+app.use('', usersRouter);
 
 app.use((req, res, next) => {
     const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
