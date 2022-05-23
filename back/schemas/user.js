@@ -10,14 +10,15 @@ const userSchema = new Schema({
     },
     password: {
         type: String,
-        required: true,
+        allowNull: true,
     },
     nickname: {
         type: String,
-        required: true,
+        allowNull: true,
     },
     naverId: {
         type: String,
+        allowNull: true,
     },
     createdAt: {
         type: Date,
