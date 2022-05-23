@@ -44,6 +44,9 @@ router.route('/user') // GET /user // 로그인 정보 매번 가져오기
                 email: req.body.email,
             });
             if (exUser) {
+                if(exUser.naverId){
+                    return res.status(403).send('네이버로 회원가입 하셨었네요.');
+                }
                 return res.status(403).send('이미 사용중인 아이디입니다.');
             }
             const hashedPassword = await bcrypt.hash(req.body.password, 12); // 숫자는 높을 수록 보안이 세진다. 대신 시간이 오래걸린다.
@@ -86,6 +89,7 @@ router.post('/user/logout', isLoggedIn, (req, res, next) => {
     req.logout();
     req.session.destroy();
     res.send('OK');
+    res.redirect('http://localhost:3003/');
 });
 
 module.exports = router;

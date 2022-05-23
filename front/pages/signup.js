@@ -12,6 +12,8 @@ import Router from 'next/router';
 const typeEmail = "email";
 const typeNaver = "naver";
 
+const serverDomain = "http://localhost:3002";
+
 const Signup = () => {
 
     const [checked, setChecked] = useState(false);
@@ -28,7 +30,7 @@ const Signup = () => {
                 Router.push('/signup/email');
             }
             else if(type === typeNaver){
-
+                Router.push(serverDomain + '/user/login/naver');
             }
             //통과 로그인 과정 ㄱㄱ
         } else { // 박스를 체크하지 않았을 때 경고메시지
