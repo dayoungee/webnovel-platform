@@ -2,11 +2,21 @@ import produce from "immer";
 
 const testData = [
     {
+        id : 1,
+        User: {
+            id:1,
+            nickname: '도토리묵념',
+        },
         title: '닥터 네임즈',
         context: '어느 날 도은설 몸에 새겨진 이름, 너는 누구니?',
         image: 'https://user-images.githubusercontent.com/55998706/165961802-dd5400cb-f2d2-43c9-a846-384263c5b28a.png',
     },
     {
+        id : 2,
+        User: {
+            id:2,
+            nickname: '김철수',
+        },
         title: '이리오너라',
         context: '돌쇠가 마님을 부르는데...',
         image: 'https://user-images.githubusercontent.com/55998706/165961802-dd5400cb-f2d2-43c9-a846-384263c5b28a.png',
@@ -41,7 +51,7 @@ const reducer = (state = initialState, action) => produce(state, (draft) => {
             draft.loadSeriesError = action.error;
             break;
         default:
-            break;
+            return state;
     }
 });
 
